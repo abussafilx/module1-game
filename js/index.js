@@ -15,6 +15,7 @@ class LineUp {
     startQuiz (){
         const answerDisp = document.getElementById("answer");
         const attemptDisp = document.getElementById("attempts");
+        const buttonSpace = document.getElementById("button")
         
         this.players.forEach(element => {
             for (let i=0; i < element.length; i++) {
@@ -22,17 +23,23 @@ class LineUp {
                 letter.classList.add("letter");
                 letter.innerText = element[i].toUpperCase();
                 answerDisp.appendChild(letter)    
-                };
-
-            for (let i=0; i < element.length; i++) {
+               
                 const letterInput = document.createElement("div");
                 letterInput.classList.add("letter");
-                letterInput.innerText = "X";
+                letterInput.innerHTML = `<input type="text" id="letter" name="letter" required minlength="1" maxlength="1" size="10" />`;
                 attemptDisp.appendChild(letterInput);
                 };
-            
+
+               
         });
+
+
+        const answerButton = document.createElement("button")
+        answerButton.innerText = "Answer"
+        buttonSpace.appendChild(answerButton)
     }
+
+    
 };
 
 class Player {
@@ -50,6 +57,8 @@ const LineUp1 = new LineUp(442,"São Paulo FC", "São Paulo vs. Flamengo | Copa 
 LineUp1.updateDisplay();
 
 LineUp1.startQuiz();
+
+
 
 
 
