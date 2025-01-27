@@ -1,0 +1,30 @@
+body {
+    background-color: black;
+    margin: 0;
+    padding 0;
+}
+   
+
+#board {
+    height: 90vh;
+    width: 90vw;
+    margin: 0;
+    position: relative;
+    border: 2px solid blue;
+    left: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+
+
+#spinner {
+    background-color: lightblue;
+    border: 3px solid lightskyblue;
+    width: 1vw;
+    height: 60vh;
+    position: center;
+    top: 100%;
+    left: 50%;
+}
