@@ -25,17 +25,26 @@ class LineUp {
     displayPlayerInputs() {
         const answerDisp = document.getElementById("answer");
         const attemptDisp = document.getElementById("attempts");
+        const playerinfo = document.getElementById("playerinfo")
 
         // Clear previous inputs
         answerDisp.innerHTML = "";
         attemptDisp.innerHTML = "";
 
-        const currentPlayer = this.players[this.currentPlayerIndex];
+        const currentPlayer = this.players[this.currentPlayerIndex].name;
         const attemptLine = document.createElement("div");
         attemptDisp.appendChild(attemptLine);
 
+        // Tips
+        playerinfo.innerHTML = "";
+        const tips = document.createElement("div");
+        tips.classList.add("tips");
+        tips.innerText = `Tip: ${this.players[this.currentPlayerIndex].position} | #${this.players[this.currentPlayerIndex].number}`
+        playerinfo.appendChild(tips)
+
         //for each player, display letter by letter and have the same number of input spaces. The game compares letter by letter
         for (let i = 0; i < currentPlayer.length; i++) {
+
             // Correct answer space (hidden)
             const letter = document.createElement("div");
             letter.classList.add("letter");
@@ -50,6 +59,8 @@ class LineUp {
             letterInput.maxLength = 1;
             attemptLine.appendChild(letterInput);
         }
+
+
 
         //previous button
         const buttonSpace = document.getElementById("button");
@@ -72,16 +83,33 @@ class LineUp {
         buttonSpace.appendChild(nextButton);
         nextButton.addEventListener("click", () => this.nextQuestion());
 
+        if (this.currentPlayerIndex === 0) {
+            prevButton.disabled = true;}
+
+            if (this.currentPlayerIndex === this.players.length - 1) {
+                nextButton.disabled = true;}
+
+        //check if answered
+
+        let isAnswered = this.players[this.currentPlayerIndex].answered
+
+        if (isAnswered === true) {
+            answerButton.disabled = true;
+            document.querySelectorAll(".letter").forEach((letter) => {
+            letter.style.visibility = "visible";})
+
+        };
+
 
     }
 
-
+    
 
     //answer checker. If it is correct, should move to the next player. If it is not, should open another answer line. Up to 6 attempts.
     checkAnswer() {
         const inputs = document.querySelectorAll(".letter-input");
         const letters = document.querySelectorAll(".letter")
-        const correctWord = this.players[this.currentPlayerIndex];
+        const correctWord = this.players[this.currentPlayerIndex].name;
         let isCorrect = true;
 
         const attemptDisp = document.getElementById("attempts");
@@ -89,10 +117,10 @@ class LineUp {
         attemptDisp.appendChild(attempt2)
 
 
-        inputs.forEach((input, index) => {
-            if (input.value.toUpperCase() === correctWord[index].toUpperCase()) {
+        inputs.forEach((input, i) => {
+            if (input.value.toUpperCase() === correctWord[i].toUpperCase()) {
                 input.style.backgroundColor = "lightgreen"; // Correct
-                letters[index].style.visibility = "visible"; // Reveal correct letter
+                letters[i].style.visibility = "visible"; // Reveal correct letter
                 input.disabled = true;
             } else {
                 input.style.backgroundColor = "lightcoral"; // Incorrect
@@ -102,19 +130,21 @@ class LineUp {
 
         if (isCorrect) {
 
+            this.players[this.currentPlayerIndex].answered = true;
+
         }
     }
 
     prevQuestion() {
-        this.currentPlayerIndex--;
-        if (this.currentPlayerIndex >= 0) {
+        if (this.currentPlayerIndex > 0) { // Prevent index from going below 0
+            this.currentPlayerIndex--;
             this.displayPlayerInputs();
         }
     }
 
     nextQuestion() {
-        this.currentPlayerIndex++;
-        if (this.currentPlayerIndex < this.players.length) {
+        if (this.currentPlayerIndex < this.players.length - 1) {
+            this.currentPlayerIndex++;
             this.displayPlayerInputs();
         }
     }
@@ -130,7 +160,7 @@ class Attempts {
 
 };
 
-const LineUp1 = new LineUp(442, "São Paulo FC", "São Paulo vs. Flamengo | Copa do Brasil Final 2023", ["Rafael", "Rafinha", "Arboleda", "Calleri"])
+const LineUp1 = new LineUp(442, "São Paulo FC", "São Paulo 1 x 1 Flamengo | Copa do Brasil Final 2023", [{ name: "Rafael", position: "Goalkeeper", number: 23, answered: "false" }, { name: "Calleri", position: "Striker", number: 9, answered: "false" }])
 
 LineUp1.updateDisplay();
 
