@@ -120,7 +120,7 @@ class LineUp {
         inputs.forEach((input, i) => {
             if (input.value.toUpperCase() === correctWord[i].toUpperCase()) {
                 input.style.backgroundColor = "lightgreen"; // Correct
-                letters[i].style.visibility = "visible"; // Reveal correct letter
+                letters[i].style.visibility = "visible"; 
                 input.disabled = true;
             } else {
                 input.style.backgroundColor = "lightcoral"; // Incorrect
@@ -136,7 +136,7 @@ class LineUp {
     }
 
     prevQuestion() {
-        if (this.currentPlayerIndex > 0) { // Prevent index from going below 0
+        if (this.currentPlayerIndex > 0) { 
             this.currentPlayerIndex--;
             this.displayPlayerInputs();
         }

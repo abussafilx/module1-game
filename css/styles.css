@@ -1,13 +1,12 @@
 body {
-    background-color: rgb(150, 170, 144);
+    background-color: rgb(216, 228, 215);
     margin: 0;
     padding: 0;
     font-family: "Gill Sans", sans-serif;
-
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
 
 
@@ -15,28 +14,29 @@ body {
 
 h1 {
     text-align: center;
-    color: white;
+    color: rgb(53, 51, 51);
     margin-bottom: 20px;
 }
 
 hr {
-        border: 1px solid white;
-        height: 2px; 
-        background-color: white; 
-        width: 80%; 
-        margin: 20px auto; 
-    
+    border: 1px solid white;
+    height: 2px;
+    background-color: white;
+    width: 80%;
+    margin: 20px auto;
+
 
 }
 
 #board {
+    background-color: rgb(150, 170, 144);
     width: 85vw;
     height: 90vh;
-    border: 2px solid rgb(248, 246, 246);
+    border: 2px solid rgb(97, 92, 92);
     border-radius: 1%;
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
 
 }
@@ -47,7 +47,8 @@ hr {
     text-align: center;
 }
 
-#answer, #attempts {
+#answer,
+#attempts {
     align-items: center;
     justify-content: center;
 }
@@ -59,28 +60,28 @@ hr {
 
 #answer .letter {
     text-align: center;
-    color: rgb(20, 19, 19);
+    color: #ffffff;
     width: 50px;
     font-size: 40px;
     margin: 5px;
     padding: 10px;
-    background-color: rgb(247, 242, 242);
-    border: 1px solid black;
+    background-color: rgb(24, 167, 55);
+    border: 1px solid rgb(39, 104, 71);
     border-radius: 50%;
 }
 
 #attempts {
     display: flex;
-    flex-direction: column; /* Stack divs vertically */
-    align-items: center; /* Center the divs horizontally */
-    gap: 10px; /* Optional spacing between the divs */
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
 }
 
 #attempts .div {
-    display: flex; /* Align items inside the div horizontally */
+    display: flex;
     flex-direction: row;
-    align-items: center; /* Center items vertically */
-    gap: 10px; /* Spacing between elements in each div */
+    align-items: center;
+    gap: 10px;
 }
 
 input {
@@ -90,8 +91,8 @@ input {
     font-size: 40px;
     margin: 5px;
     padding: 10px;
-    background-color: rgb(0, 0, 0);
-    border: 1px solid rgb(168, 255, 211);
+    background-color: rgb(73, 155, 107);
+    border: 1px solid rgb(207, 207, 207);
     border-radius: 50%;
 }
 
@@ -112,22 +113,25 @@ button {
     margin: 20px;
 }
 
-/* input {
-    width: 40px;
-    font-size: 40px;
-    background-color: #04aa6d00;
-    color: white;
-    text-align: center;
-    border: none;
-} */
-
 button:hover {
     background-color: #037a55;
     cursor: pointer;
 }
 
+button:disabled {
+    background-color: #b9bbba;
+    cursor: pointer;
+}
+
+
 input:focus {
     outline: none;
     border: 1px solid #04AA6D;
     border-radius: 50%;
+}
+
+#playerinfo {
+    text-align: center;
+    color: #ffffff;
+    
 }
