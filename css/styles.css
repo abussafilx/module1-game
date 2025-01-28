@@ -20,7 +20,7 @@ h1 {
 }
 
 hr {
-            border: 0;
+        border: 1px solid white;
         height: 2px; 
         background-color: white; 
         width: 80%; 
@@ -71,9 +71,19 @@ hr {
 
 #attempts {
     display: flex;
+    flex-direction: column; /* Stack divs vertically */
+    align-items: center; /* Center the divs horizontally */
+    gap: 10px; /* Optional spacing between the divs */
 }
 
-#attempts .letter {
+#attempts .div {
+    display: flex; /* Align items inside the div horizontally */
+    flex-direction: row;
+    align-items: center; /* Center items vertically */
+    gap: 10px; /* Spacing between elements in each div */
+}
+
+input {
     text-align: center;
     color: rgb(255, 255, 255);
     width: 50px;
@@ -83,6 +93,10 @@ hr {
     background-color: rgb(0, 0, 0);
     border: 1px solid rgb(168, 255, 211);
     border-radius: 50%;
+}
+
+.letter-input {
+    text-transform: uppercase;
 }
 
 button {
@@ -98,14 +112,14 @@ button {
     margin: 20px;
 }
 
-input {
+/* input {
     width: 40px;
     font-size: 40px;
     background-color: #04aa6d00;
     color: white;
     text-align: center;
     border: none;
-}
+} */
 
 button:hover {
     background-color: #037a55;
