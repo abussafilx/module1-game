@@ -54,8 +54,13 @@ hr {
 #answer {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allows wrapping */
     gap: 10px;
     margin-top: 30px;
+    width: 100%;
+    max-width: 100%; /* Ensures it doesn’t overflow */
+    padding: 10px;
 }
 
 #answer .letter {
@@ -66,8 +71,8 @@ hr {
     font-size: 26px;
     font-weight: bold;
     padding: 10px;
-    background-color: rgb(24, 167, 55);
-    border: 2px solid rgb(39, 104, 71);
+    background-color: rgb(19, 112, 97);
+    border: 2px solid rgb(160, 202, 160);
     border-radius: 50%;
 }
 
@@ -75,19 +80,22 @@ hr {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 100%;
     gap: 8px;
     margin-top: 10px;
 }
 
-#attempts .div {
+#attempts div {
     display: flex;
-    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap; /* Ensures that attempts also wrap */
 }
 
 input.letter-input {
     text-align: center;
     text-transform: uppercase;
-    color: rgb(255, 255, 255);
+    color: white;
     width: 30px;
     height: 30px;
     font-size: 28px;
@@ -98,6 +106,7 @@ input.letter-input {
     border: 2px solid rgb(207, 207, 207);
     border-radius: 50%;
     transition: all 0.2s ease-in-out;
+    flex: 0 1 auto; /* Allows flexibility without shrinking too much */
 }
 
 input.letter-input:focus {
@@ -105,6 +114,11 @@ input.letter-input:focus {
     border: 2px solid #04AA6D;
     box-shadow: 0px 0px 8px rgba(4, 170, 109, 0.6);
 
+}
+
+input.letter-input:disabled {
+    background-color: rgba(73, 155, 107, 0.295);
+    border: 2px solid rgba(207, 207, 207, 0.24);
 }
 
 #button {
@@ -154,4 +168,37 @@ button:disabled {
     background-color: rgba(27, 95, 55, 0.493);
     padding: 10px;
     border-radius: 6px;
+}
+
+@media (max-width: 600px) {
+    #board {
+        width: 85%;
+        min-height: 50vh;
+    }
+
+    #answer {
+        gap: 2px;
+    }
+
+    #answer .letter {
+        width: 15px;
+        height: 15px;
+        font-size: 16px;
+        line-height: px;
+        
+    }
+
+    input.letter-input {
+        width: 15px;
+        height: 15px;
+        font-size: 16px;
+        margin: 2px;
+        padding: 8px;
+    }
+
+    button {
+        width: 110px;
+        padding: 10px;
+        font-size: 14px;
+    }
 }
