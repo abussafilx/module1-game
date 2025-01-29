@@ -13,7 +13,7 @@ class LineUp {
     // updates the titles and game information displayed
     updateDisplay() {
         const gameInfo = document.getElementById("gameinfo");
-        gameInfo.innerHTML = `<h3>Game information</h3> <p><b>Club</b>: ${this.club}</p> <p><b>Game</b>: ${this.game}</p>`;
+        gameInfo.innerHTML = `<p><b>Club</b>: ${this.club}</p> <p><b>Game</b>: ${this.game}</p>`;
     }
 
     // Sets up the quiz
@@ -167,6 +167,15 @@ class LineUp {
 
             this.players[this.currentPlayerIndex].answered = true;
 
+        }
+
+        //check if all players are answered
+        const allAnswered = this.players.every(player => player.answered === true);
+
+        if (allAnswered) {
+            setTimeout(() => {
+                window.location.href = "gameover.html"; // Redirect to the game-over page
+            }, 1000);
         }
     }
 
