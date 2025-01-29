@@ -18,9 +18,18 @@ h1 {
     margin-bottom: 20px;
 }
 
+h3 {
+    text-align: center;
+    color: rgb(245, 245, 245);
+    margin-bottom: 20px;
+    font-size: 22px;
+    text-transform: uppercase;
+}
+
 hr {
     border: 1px solid white;
-    height: 2px;
+    
+    height: 1px;
     background-color: white;
     width: 80%;
     margin: 20px auto;
@@ -96,14 +105,30 @@ input {
     border-radius: 50%;
 }
 
+input:focus {
+    outline: none;
+    border: 2px solid #04AA6D;
+    box-shadow: 0px 0px 8px rgba(4, 170, 109, 0.6);
+}
+
 .letter-input {
     text-transform: uppercase;
+}
+
+#button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center; 
+    align-items: center;    
+    width: 100%;           
+    margin-top: 20px;
 }
 
 button {
     background-color: #04AA6D;
     border: none;
     color: white;
+    width: 120px;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -116,6 +141,8 @@ button {
 button:hover {
     background-color: #037a55;
     cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 button:disabled {
@@ -133,5 +160,8 @@ input:focus {
 #playerinfo {
     text-align: center;
     color: #ffffff;
-    
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 10px;
 }
+

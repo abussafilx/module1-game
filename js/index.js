@@ -13,7 +13,7 @@ class LineUp {
     // updates the titles and game information displayed
     updateDisplay() {
         const gameInfo = document.getElementById("gameinfo");
-        gameInfo.innerHTML = `<p><b>Club</b>: ${this.club}</p> <p><b>Game</b>: ${this.game}</p>`;
+        gameInfo.innerHTML = `<h3>Game information</h3> <p><b>Club</b>: ${this.club}</p> <p><b>Game</b>: ${this.game}</p>`;
     }
 
     // Sets up the quiz
@@ -84,10 +84,21 @@ class LineUp {
         nextButton.addEventListener("click", () => this.nextQuestion());
 
         if (this.currentPlayerIndex === 0) {
-            prevButton.disabled = true;}
+            prevButton.disabled = true;
+        }
 
-            if (this.currentPlayerIndex === this.players.length - 1) {
-                nextButton.disabled = true;}
+        if (this.currentPlayerIndex === this.players.length - 1) {
+            nextButton.disabled = true;
+        }
+
+        // question counter
+
+        const counterSpace = document.getElementById("counter")
+        const counter = document.createElement("div");
+        counterSpace.innerHTML = ""
+        counter.innerText = `${this.currentPlayerIndex + 1} / ${this.players.length}`;
+        counterSpace.appendChild(counter);
+
 
         //check if answered
 
@@ -96,14 +107,15 @@ class LineUp {
         if (isAnswered === true) {
             answerButton.disabled = true;
             document.querySelectorAll(".letter").forEach((letter) => {
-            letter.style.visibility = "visible";})
+                letter.style.visibility = "visible";
+            })
 
         };
 
 
     }
 
-    
+
 
     //answer checker. If it is correct, should move to the next player. If it is not, should open another answer line. Up to 6 attempts.
     checkAnswer() {
@@ -116,11 +128,11 @@ class LineUp {
         const attempt2 = document.createElement("div")
         attemptDisp.appendChild(attempt2)
 
-
+        //comparing letter by letter
         inputs.forEach((input, i) => {
             if (input.value.toUpperCase() === correctWord[i].toUpperCase()) {
                 input.style.backgroundColor = "lightgreen"; // Correct
-                letters[i].style.visibility = "visible"; 
+                letters[i].style.visibility = "visible";
                 input.disabled = true;
             } else {
                 input.style.backgroundColor = "lightcoral"; // Incorrect
@@ -136,7 +148,7 @@ class LineUp {
     }
 
     prevQuestion() {
-        if (this.currentPlayerIndex > 0) { 
+        if (this.currentPlayerIndex > 0) {
             this.currentPlayerIndex--;
             this.displayPlayerInputs();
         }
@@ -156,11 +168,7 @@ class Player {
     }
 }
 
-class Attempts {
-
-};
-
-const LineUp1 = new LineUp(442, "São Paulo FC", "São Paulo 1 x 1 Flamengo | Copa do Brasil Final 2023", [{ name: "Rafael", position: "Goalkeeper", number: 23, answered: "false" }, { name: "Calleri", position: "Striker", number: 9, answered: "false" }])
+const LineUp1 = new LineUp(442, "São Paulo FC", "São Paulo 1 x 1 Flamengo | Copa do Brasil Final 2023", [{ name: "Rafael", position: "Goalkeeper", number: 23, answered: "false" }, { name: "Rafinha", position: "Right Defender", number: 13, answered: "false" }, { name: "Arboleda", position: "Defender", number: 5, answered: "false" }, { name: "Beraldo", position: "Defender", number: 32, answered: "false" }, { name: "Wellington", position: "Left Defender", number: 6, answered: "false" }, { name: "Pablo Maia", position: "Midfielder", number: 25, answered: "false" }, { name: "Alisson", position: "Midfielder", number: 15, answered: "false" }, { name: "Rato", position: "Winger", number: 27, answered: "false" }, { name: "Rodrigo Nestor", position: "Miedfilder", number: 11, answered: "false" }, { name: "Lucas", position: "Forward", number: 7, answered: "false" }, { name: "Calleri", position: "Striker", number: 9, answered: "false" }])
 
 LineUp1.updateDisplay();
 
