@@ -5,7 +5,7 @@ class LineUp {
         this.formation = formation; // 442, 433 or 352 - to organize the players displayed on the field
         this.club = club;
         this.game = game;
-        this.players = players; // array
+        this.players = players; // array of objects
         this.currentPlayerIndex = 0; // Track the active player
 
     }
@@ -60,6 +60,23 @@ class LineUp {
             attemptLine.appendChild(letterInput);
         }
 
+        // Select all input fields and attach event listeners
+        const inputs = document.querySelectorAll(".letter-input");
+        inputs.forEach((input, index) => {
+            input.addEventListener("input", (e) => {
+                if (e.target.value.length === 1) {
+                    // Move to the next input if it exists
+                    const nextInput = inputs[index + 1];
+                    if (nextInput) nextInput.focus();
+                }
+            });
+
+        });
+
+        // Focus on the first input
+        if (inputs.length > 0) {
+            inputs[0].focus();
+        }
 
 
         //previous button
@@ -107,7 +124,10 @@ class LineUp {
         if (isAnswered === true) {
             answerButton.disabled = true;
             document.querySelectorAll(".letter").forEach((letter) => {
-                letter.style.visibility = "visible";
+                letter.style.visibility = "visible"
+            });
+            document.querySelectorAll(".letter-input").forEach((input) => {
+                input.disabled = true;
             })
 
         };
@@ -137,6 +157,9 @@ class LineUp {
             } else {
                 input.style.backgroundColor = "lightcoral"; // Incorrect
                 isCorrect = false;
+                setTimeout(() => {
+                    input.value = "";
+                }, 1000);
             }
         });
 
@@ -165,6 +188,8 @@ class LineUp {
 class Player {
     constructor(name) {
         this.name = name;
+        this.counter = 0;
+        this.timer = 0;
     }
 }
 
