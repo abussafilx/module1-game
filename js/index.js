@@ -1,12 +1,12 @@
 // Lineups are the main information of the game. Each day a new challenge with a new lineup.
 
 class LineUp {
-    constructor(formation, club, game, players) {
+    constructor(formation, club, game, players, startIndex = 0) {
         this.formation = formation; // 442, 433 or 352 - to organize the players displayed on the field
         this.club = club;
         this.game = game;
         this.players = players; // array of objects
-        this.currentPlayerIndex = 0; // Track the active player
+        this.currentPlayerIndex = startIndex; // Track the active player
 
     }
 
@@ -85,7 +85,10 @@ class LineUp {
         const prevButton = document.createElement("button");
         prevButton.innerText = "Previous";
         buttonSpace.appendChild(prevButton);
-        prevButton.addEventListener("click", () => this.prevQuestion());
+        prevButton.addEventListener("click", () => {
+            this.prevQuestion();
+            updateURL();
+        });
 
 
         //answer button  
@@ -98,7 +101,10 @@ class LineUp {
         const nextButton = document.createElement("button");
         nextButton.innerText = "Next";
         buttonSpace.appendChild(nextButton);
-        nextButton.addEventListener("click", () => this.nextQuestion());
+        nextButton.addEventListener("click", () => {
+            this.nextQuestion();
+            updateURL();
+        });
 
         if (this.currentPlayerIndex === 0) {
             prevButton.disabled = true;
@@ -202,14 +208,44 @@ class Player {
     }
 }
 
-const LineUp1 = new LineUp(442, "São Paulo FC", "São Paulo 1 x 1 Flamengo | Copa do Brasil Final 2023", [{ name: "Rafael", position: "Goalkeeper", number: 23, answered: "false" }, { name: "Rafinha", position: "Right Defender", number: 13, answered: "false" }, { name: "Arboleda", position: "Defender", number: 5, answered: "false" }, { name: "Beraldo", position: "Defender", number: 32, answered: "false" }, { name: "Wellington", position: "Left Defender", number: 6, answered: "false" }, { name: "Pablo Maia", position: "Midfielder", number: 25, answered: "false" }, { name: "Alisson", position: "Midfielder", number: 15, answered: "false" }, { name: "Rato", position: "Winger", number: 27, answered: "false" }, { name: "Rodrigo Nestor", position: "Miedfilder", number: 11, answered: "false" }, { name: "Lucas", position: "Forward", number: 7, answered: "false" }, { name: "Calleri", position: "Striker", number: 9, answered: "false" }])
+function getPlayerIndexFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.has("player") ? parseInt(params.get("player")) : 0;
+}
+
+const playerIndex = getPlayerIndexFromURL(); // Get player index before creating the lineup
+
+const LineUp1 = new LineUp(442, "São Paulo FC", "São Paulo 1 x 1 Flamengo | Copa do Brasil Final 2023",
+    [{ name: "Rafael", position: "Goalkeeper", number: 23, answered: false },
+    { name: "Rafinha", position: "Right Defender", number: 13, answered: false },
+    { name: "Arboleda", position: "Defender", number: 5, answered: false },
+    { name: "Beraldo", position: "Defender", number: 32, answered: false },
+    { name: "Wellington", position: "Left Defender", number: 6, answered: false },
+    { name: "Pablo Maia", position: "Midfielder", number: 25, answered: false },
+    { name: "Alisson", position: "Midfielder", number: 15, answered: false },
+    { name: "Rato", position: "Winger", number: 27, answered: false },
+    { name: "Rodrigo Nestor", position: "Midfielder", number: 11, answered: false },
+    { name: "Lucas", position: "Forward", number: 7, answered: false },
+    { name: "Calleri", position: "Striker", number: 9, answered: false }], playerIndex); // Pass the index
 
 LineUp1.updateDisplay();
-
 LineUp1.startQuiz();
 
+function updateURL() {
+    const newURL = window.location.pathname + `?player=${LineUp1.currentPlayerIndex}`;
+    window.history.pushState({}, "", newURL);
+}
 
-
-
-
+const LineUp2 = new LineUp(352, "Brazil", "Brazil 2 x 0 Germany | World Cup Final 2002",
+    [{ name: "Rafael", position: "Goalkeeper", number: 23, answered: false },
+    { name: "Rafinha", position: "Right Defender", number: 13, answered: false },
+    { name: "Arboleda", position: "Defender", number: 5, answered: false },
+    { name: "Beraldo", position: "Defender", number: 32, answered: false },
+    { name: "Wellington", position: "Left Defender", number: 6, answered: false },
+    { name: "Pablo Maia", position: "Midfielder", number: 25, answered: false },
+    { name: "Alisson", position: "Midfielder", number: 15, answered: false },
+    { name: "Rato", position: "Winger", number: 27, answered: false },
+    { name: "Rodrigo Nestor", position: "Midfielder", number: 11, answered: false },
+    { name: "Lucas", position: "Forward", number: 7, answered: false },
+    { name: "Calleri", position: "Striker", number: 9, answered: false }], playerIndex); // Pass the index
 
