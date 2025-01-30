@@ -51,6 +51,17 @@ class LineUp {
         //for each player, display letter by letter and have the same number of input spaces. The game compares letter by letter
         for (let i = 0; i < currentPlayer.length; i++) {
 
+            if (currentPlayer[i] === " ") {
+                // If it's a space, add a space instead of a letter or input
+                const skipSpace = document.createElement("div");
+
+                skipSpace.classList.add("skipspace");
+                skipSpace.innerText = "-";
+                answerDisp.appendChild(document.createElement("br"));
+                attemptLine.appendChild(skipSpace);
+                continue;
+            }
+
             // Correct answer space (hidden)
             const letter = document.createElement("div");
             letter.classList.add("letter");
@@ -64,10 +75,13 @@ class LineUp {
             letterInput.classList.add("letter-input");
             letterInput.maxLength = 1;
             attemptLine.appendChild(letterInput);
-        }
+
+        };
 
         // Select all input fields and attach event listeners
         const inputs = document.querySelectorAll(".letter-input");
+
+
         inputs.forEach((input, index) => {
             input.addEventListener("input", (e) => {
                 if (e.target.value.length === 1) {
@@ -83,12 +97,13 @@ class LineUp {
                 };
             });
 
+
         });
 
         // Focus on the first input
-        if (inputs.length > 0) {
+        setTimeout(() => {
             inputs[0].focus();
-        }
+        }, 100);
 
 
         //previous button
@@ -180,106 +195,54 @@ class LineUp {
 
 
     displayField() {
+        // Update game info on the field
+        const fieldGameInfo = document.getElementById("gameinfo2");
+        fieldGameInfo.innerHTML = `<p><b>Club</b>: ${this.club}</p> <p><b>Game</b>: ${this.game}</p>`;
+
+        // Get field sections
+        const sections = {
+            gk: document.getElementById("gk"),
+            defense: document.getElementById("defense"),
+            midfield: document.getElementById("midfield"),
+            attack: document.getElementById("attack")
+        };
 
 
-        const gameInfo2 = document.getElementById("gameinfo2");
-        gameInfo2.innerHTML = `<p><b>Club</b>: ${this.club}</p> <p><b>Game</b>: ${this.game}</p>`;
+        // Formation mapping
+        const formationMap = {
+            442: [1, 4, 4, 2],  // 1 GK, 4 Defenders, 4 Midfielders, 2 Attackers
+            433: [1, 4, 3, 3],
+            352: [1, 3, 5, 2]
+        };
 
-        const field = document.getElementById("field")
-        const board = document.getElementById("board")
+        const positions = ["gk", "defense", "midfield", "attack"];
+        let playerIndex = 0;
 
-        const gk = document.getElementById("gk")
-        gk.innerHTML = ""
-        const defense = document.getElementById("defense")
-        defense.innerHTML = ""
-        const midfield = document.getElementById("midfield")
-        midfield.innerHTML = ""
-        const attack = document.getElementById("attack")
-        attack.innerHTML = ""
-
-        if (this.formation === 442) {
-
-            const keeper = document.createElement("div");
-            keeper.classList.add("shirt");
-            gk.appendChild(keeper);
-            keeper.addEventListener("click", () => {
-                this.selectPlayer(0);
-            });
-
-            const defender = document.createElement("div");
-            defender.classList.add("shirt");
-            defense.appendChild(defender);
-            defender.addEventListener("click", () => {
-                this.selectPlayer(1);
-            });
-
-
-            const defender2 = document.createElement("div");
-            defender2.classList.add("shirt");
-            defense.appendChild(defender2);
-            defender2.addEventListener("click", () => {
-                this.selectPlayer(2);
-            });
-
-            const defender3 = document.createElement("div");
-            defender3.classList.add("shirt");
-            defense.appendChild(defender3)
-            defender3.addEventListener("click", () => {
-                this.selectPlayer(3);
-            });
-
-            const defender4 = document.createElement("div");
-            defender4.classList.add("shirt");
-            defense.appendChild(defender4);
-            defender4.addEventListener("click", () => {
-                this.selectPlayer(4);
-            });
-
-            const midfielder = document.createElement("div");
-            midfielder.classList.add("shirt");
-            midfield.appendChild(midfielder);
-            midfielder.addEventListener("click", () => {
-                this.selectPlayer(5);
-            });
-
-            const midfielder2 = document.createElement("div");
-            midfielder2.classList.add("shirt");
-            midfield.appendChild(midfielder2);
-            midfielder2.addEventListener("click", () => {
-                this.selectPlayer(6);
-            });
-
-            const midfielder3 = document.createElement("div");
-            midfielder3.classList.add("shirt");
-            midfield.appendChild(midfielder3);
-            midfielder3.addEventListener("click", () => {
-                this.selectPlayer(7);
-            });
-
-            const midfielder4 = document.createElement("div");
-            midfielder4.classList.add("shirt");
-            midfield.appendChild(midfielder4);
-            midfielder4.addEventListener("click", () => {
-                this.selectPlayer(8);
-            });
-
-            const attacker = document.createElement("div");
-            attacker.classList.add("shirt");
-            attack.appendChild(attacker);
-            attacker.addEventListener("click", () => {
-                this.selectPlayer(9);
-            });
-
-            const attacker2 = document.createElement("div");
-            attacker2.classList.add("shirt");
-            attack.appendChild(attacker2);
-            attacker2.addEventListener("click", () => {
-                this.selectPlayer(10);
-            });
-
-
+        if (!formationMap[this.formation]) {
+            console.error("Invalid formation:", this.formation);
+            return;
         }
+
+        // Generate player elements dynamically
+        formationMap[this.formation].forEach((count, sectionIndex) => {
+            for (let i = 0; i < count; i++) {
+                if (playerIndex >= this.players.length) break;
+
+                const playerDiv = document.createElement("div");
+                playerDiv.classList.add("shirt");
+                playerDiv.innerHTML = `<p> ${ this.players[playerIndex].number}</p>`; // Show jersey number
+
+                // Attach event listener for selection
+                playerDiv.addEventListener("click", ((index) => () => this.selectPlayer(index))(playerIndex));
+
+                // Append player to the correct field section
+                sections[positions[sectionIndex]].appendChild(playerDiv);
+
+                playerIndex++;
+            }
+        });
     }
+
 
 
 
@@ -287,7 +250,7 @@ class LineUp {
     checkAnswer() {
         const inputs = document.querySelectorAll(".letter-input");
         const letters = document.querySelectorAll(".letter")
-        const correctWord = this.players[this.currentPlayerIndex].name;
+        const correctWord = this.players[this.currentPlayerIndex].name.replace(/\s/g, ""); // Remove spaces from correct answer
         let isCorrect = true;
 
         const attemptDisp = document.getElementById("attempts");
@@ -312,7 +275,7 @@ class LineUp {
         if (isCorrect) {
 
             this.players[this.currentPlayerIndex].answered = true;
- 
+
         }
 
         //check if all players are answered
@@ -326,7 +289,7 @@ class LineUp {
     }
 
     prevQuestion() {
-        
+
         if (this.currentPlayerIndex > 0) {
             this.currentPlayerIndex--;
             this.selectPlayer(this.currentPlayerIndex);
@@ -358,31 +321,7 @@ function getPlayerIndexFromURL() {
 
 const playerIndex = getPlayerIndexFromURL(); // Get player index before creating the lineup
 
-const lineUp1 = new LineUp(442, "São Paulo FC", "São Paulo 1 x 1 Flamengo | Copa do Brasil Final 2023",
-    [{ name: "Rafael", position: "Goalkeeper", number: 23, answered: false },
-    { name: "Rafinha", position: "Right Defender", number: 13, answered: false },
-    { name: "Arboleda", position: "Defender", number: 5, answered: false },
-    { name: "Beraldo", position: "Defender", number: 32, answered: false },
-    { name: "Wellington", position: "Left Defender", number: 6, answered: false },
-    { name: "Pablo Maia", position: "Midfielder", number: 25, answered: false },
-    { name: "Alisson", position: "Midfielder", number: 15, answered: false },
-    { name: "Rato", position: "Winger", number: 27, answered: false },
-    { name: "Rodrigo Nestor", position: "Midfielder", number: 11, answered: false },
-    { name: "Lucas", position: "Forward", number: 7, answered: false },
-    { name: "Calleri", position: "Striker", number: 9, answered: false }], playerIndex); // Pass the index
-
-lineUp1.updateDisplay();
-lineUp1.startQuiz();
-lineUp1.displayField();
-
-
-
-function updateURL() {
-    const newURL = window.location.pathname + `?player=${lineUp1.currentPlayerIndex}`;
-    window.history.pushState({}, "", newURL);
-}
-
-// const lineUp2 = new LineUp(352, "Brazil", "Brazil 2 x 0 Germany | World Cup Final 2002",
+// const lineUp1 = new LineUp(352, "São Paulo FC", "São Paulo 1 x 1 Flamengo | Copa do Brasil Final 2023",
 //     [{ name: "Rafael", position: "Goalkeeper", number: 23, answered: false },
 //     { name: "Rafinha", position: "Right Defender", number: 13, answered: false },
 //     { name: "Arboleda", position: "Defender", number: 5, answered: false },
@@ -395,3 +334,32 @@ function updateURL() {
 //     { name: "Lucas", position: "Forward", number: 7, answered: false },
 //     { name: "Calleri", position: "Striker", number: 9, answered: false }], playerIndex); // Pass the index
 
+// lineUp1.updateDisplay();
+// lineUp1.startQuiz();
+// lineUp1.displayField();
+
+
+
+
+
+const lineUp2 = new LineUp(352, "Brazil", "Brazil 2 x 0 Germany | World Cup Final 2002",
+    [{ name: "Marcos", position: "Goalkeeper", number: 1, answered: false },
+    { name: "Lucio", position: "Defender", number: 3, answered: false },
+    { name: "Edmilson", position: "Defender", number: 5, answered: false },
+    { name: "Roque Junior", position: "Defender", number: 4, answered: false },
+    { name: "Cafu", position: "Right Defender", number: 2, answered: false },
+    { name: "Kleberson", position: "Midfielder", number: 23, answered: false },
+    { name: "Ronaldinho", position: "Midfielder", number: 11, answered: false },
+    { name: "Gilberto Silva", position: "Midfielder", number: 15, answered: false },
+    { name: "Roberto Carlos", position: "Left Defender", number: 6, answered: false },
+    { name: "Rivaldo", position: "Forward", number: 10, answered: false },
+    { name: "Ronaldo", position: "Striker", number: 9, answered: false }], playerIndex); // Pass the index
+
+lineUp2.updateDisplay();
+lineUp2.startQuiz();
+lineUp2.displayField();
+
+function updateURL() {
+    const newURL = window.location.pathname + `?player=${lineUp1.currentPlayerIndex}`;
+    window.history.pushState({}, "", newURL);
+}

@@ -47,7 +47,7 @@ hr {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
+    padding: 10px 40px;
     margin-bottom: 20px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -64,6 +64,8 @@ hr {
     text-align: center;
 }
 
+
+
 #answer {
     display: flex;
     justify-content: center;
@@ -78,15 +80,18 @@ hr {
 
 #answer .letter {
     text-align: center;
-    color: #ffffff;
+    text-transform: uppercase;
+    color: white;
     width: 30px;
     height: 30px;
-    font-size: 26px;
-    font-weight: bold;
+    font-size: 28px;
+    font-weight: 600;
+    margin: 5px;
     padding: 10px;
     background-color: #4C7B8B;
     border: 2px solid rgb(160, 202, 160);
     border-radius: 50%;
+    flex: 0 1 auto; 
 }
 
 #attempts {
@@ -102,7 +107,7 @@ hr {
 #attempts div {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap; /* Ensures that attempts also wrap */
+    flex-wrap: wrap; 
 }
 
 input.letter-input {
@@ -119,7 +124,7 @@ input.letter-input {
     border: 2px solid rgb(207, 207, 207);
     border-radius: 50%;
     transition: all 0.2s ease-in-out;
-    flex: 0 1 auto; /* Allows flexibility without shrinking too much */
+    flex: 0 1 auto; 
 }
 
 input.letter-input:focus {
@@ -167,6 +172,22 @@ button:disabled {
     transform: none;
 }
 
+#answer .skipspace {
+    font-size: 18px;
+    text-align: center;
+    width: 10px;
+    background-color: rgba(255, 255, 255, 0);
+    border:none;
+}
+
+ .skipspace {
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    width: 15px;
+    line-height: 2em;
+    background-color: rgba(255, 255, 255, 0);
+}
 
 #playerinfo {
     text-align: center;
@@ -192,10 +213,20 @@ button:disabled {
     margin: 10px 10px 40px 10px;
     background-size: contain;
     background-repeat: no-repeat; 
-    background-position: center; }
+    background-position: center; 
+    display: flex;
+    
+}
 
-.shirt.right {
-    background-image: url("../resources/greenjersey.png");
+.shirt p{
+    border: 2px solid white;
+    border-radius: 50%;
+    color:#23486A;
+    font-size: 14px;
+    height: 16px;
+    width: 16px;
+    background-color: white;
+    flex: 0 0 auto ; 
 }
 
 
@@ -217,7 +248,7 @@ button:disabled {
     .board {
         width: 85%;
         min-height: 50vh;
-        padding: 10px;
+        padding: 10px 30px ;
     }
 
     #answer {
@@ -228,7 +259,8 @@ button:disabled {
         width: 15px;
         height: 15px;
         font-size: 16px;
-        line-height: px;
+        margin: 2px;
+        padding: 8px;
         
     }
 
