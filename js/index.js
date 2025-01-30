@@ -297,11 +297,11 @@ class LineUp {
         //comparing letter by letter
         inputs.forEach((input, i) => {
             if (input.value.toUpperCase() === correctWord[i].toUpperCase()) {
-                input.style.backgroundColor = "lightgreen"; // Correct
+                input.style.backgroundColor = "#AAB99A"; // Correct
                 letters[i].style.visibility = "visible";
                 input.disabled = true;
             } else {
-                input.style.backgroundColor = "lightcoral"; // Incorrect
+                input.style.backgroundColor = "#BE3144"; // Incorrect
                 isCorrect = false;
                 setTimeout(() => {
                     input.value = "";

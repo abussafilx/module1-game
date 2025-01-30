@@ -1,8 +1,8 @@
 body {
-    background-color: rgb(216, 228, 215);
+    background-color: #23486A;
     margin: 0;
     padding: 0;
-    font-family: "Gill Sans", sans-serif;
+    font-family: "Andale Mono", AndaleMono, monospace;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -11,9 +11,15 @@ body {
 
 h1 {
     text-align: center;
-    color: rgb(53, 51, 51);
-    margin-bottom: 15px;
-    font-size: 28px;
+    color: #EFB036;
+    margin: 40px;
+    text-transform:uppercase;
+    font-family: "Andale Mono", AndaleMono, monospace; 
+    font-size: 40px; 
+    font-style: normal; 
+    font-variant: normal; 
+    font-weight: 700; 
+    line-height: 26.4px;
 }
 
 h3 {
@@ -32,16 +38,17 @@ hr {
 }
 
 .board {
-    background-color: rgb(130, 150, 130);
+    background-color: #3B6790;
     width: 85%;
     max-width: 800px;
     min-height: 60vh;
-    border: 2px solid rgb(97, 92, 92);
+    border: 2px solid #4C7B8B;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: px;
+    padding: 10px;
+    margin-bottom: 20px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
@@ -61,11 +68,11 @@ hr {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap; /* Allows wrapping */
+    flex-wrap: wrap;
     gap: 10px;
     margin-top: 30px;
     width: 100%;
-    max-width: 100%; /* Ensures it doesn’t overflow */
+    max-width: 100%;
     padding: 10px;
 }
 
@@ -77,7 +84,7 @@ hr {
     font-size: 26px;
     font-weight: bold;
     padding: 10px;
-    background-color: rgb(19, 112, 97);
+    background-color: #4C7B8B;
     border: 2px solid rgb(160, 202, 160);
     border-radius: 50%;
 }
@@ -108,7 +115,7 @@ input.letter-input {
     font-weight: 600;
     margin: 5px;
     padding: 10px;
-    background-color: rgb(73, 155, 107);
+    background-color: rgba(73, 155, 107, 0.39);
     border: 2px solid rgb(207, 207, 207);
     border-radius: 50%;
     transition: all 0.2s ease-in-out;
@@ -135,12 +142,13 @@ input.letter-input:disabled {
 }
 
 button {
-    background-color: #04AA6D;
+    background-color: #EFB036;
     border: none;
-    color: white;
+    color: #23486A;
     width: 130px;
     padding: 12px;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 600;
     border-radius: 6px;
     margin: 10px;
     transition: all 0.3s ease-in-out;
