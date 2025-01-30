@@ -31,7 +31,7 @@ hr {
     margin: 15px auto;
 }
 
-#board {
+.board {
     background-color: rgb(130, 150, 130);
     width: 85%;
     max-width: 800px;
@@ -41,11 +41,17 @@ hr {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-#board p {
+.board p{
+    color: white;
+    font-size: 18px;
+    text-align: center;
+}
+
+.gameinfo {
     color: white;
     font-size: 18px;
     text-align: center;
@@ -170,10 +176,40 @@ button:disabled {
     border-radius: 6px;
 }
 
+.shirt {
+    background-image: url("../resources/jersey.png");
+    width: 75px;
+    height: 75px;
+    cursor: pointer;
+    margin: 10px 10px 40px 10px;
+    background-size: contain;
+    background-repeat: no-repeat; 
+    background-position: center; }
+
+.shirt.right {
+    background-image: url("../resources/greenjersey.png");
+}
+
+
+.positions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-around;
+
+}
+
+.hidden {
+    display: none;
+}
+
+
+
 @media (max-width: 600px) {
-    #board {
+    .board {
         width: 85%;
         min-height: 50vh;
+        padding: 10px;
     }
 
     #answer {
@@ -201,4 +237,12 @@ button:disabled {
         padding: 10px;
         font-size: 14px;
     }
+
+    .shirt {
+        width: 65px;
+        height: 65px;
+        margin: 5px 5px 40px 5px;
+
+    }
 }
+
