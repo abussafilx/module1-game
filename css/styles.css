@@ -84,14 +84,18 @@ hr {
     color: white;
     width: 30px;
     height: 30px;
-    font-size: 28px;
-    font-weight: 600;
-    margin: 5px;
-    padding: 10px;
+    font-size: 30px;
+    font-weight: 700;
+    padding: 12px;
     background-color: #4C7B8B;
-    border: 2px solid rgb(160, 202, 160);
+    border: 3px solid #EFB036;
     border-radius: 50%;
-    flex: 0 1 auto; 
+    flex: 0 1 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
 }
 
 #attempts {
@@ -160,7 +164,8 @@ button {
 }
 
 button:hover {
-    background-color: #037a55;
+    background-color:#4C7B8B;
+    color: white;
     cursor: pointer;
     transform: scale(1.05);
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);

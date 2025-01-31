@@ -96,6 +96,12 @@ class LineUp {
                     this.checkAnswer()
                 };
             });
+            input.addEventListener("keydown", (e) => {
+                if (e.key === "Backspace" && input.value === "" && index > 0) {
+                    // Move back
+                    inputs[index - 1].focus();
+                };
+            });
 
 
         });
