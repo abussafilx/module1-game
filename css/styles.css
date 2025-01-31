@@ -251,7 +251,7 @@ button:disabled {
 
 @media (max-width: 600px) {
     .board {
-        width: 85%;
+        width: 75%;
         min-height: 50vh;
         padding: 10px 30px ;
     }
@@ -284,8 +284,8 @@ button:disabled {
     }
 
     .shirt {
-        width: 65px;
-        height: 65px;
+        width: 55px;
+        height: 55px;
         margin: 5px 5px 40px 5px;
 
     }
